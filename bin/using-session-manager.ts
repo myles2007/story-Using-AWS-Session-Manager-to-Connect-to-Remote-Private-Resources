@@ -6,7 +6,7 @@ import { BastionStack } from '../lib/stack.BastionHost';
 import { AuroraDBStack } from '../lib/stack.AuroraDB';
 
 const app = new cdk.App();
-new NetworkStack(app, 'UsingSessionManager-Network', {
+const network_stack = new NetworkStack(app, 'UsingSessionManager-Network', {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */
@@ -23,5 +23,7 @@ new NetworkStack(app, 'UsingSessionManager-Network', {
 
   /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
 });
-new BastionStack(app, 'UsingSessionManager-Bastion', {})
+new BastionStack(app, 'UsingSessionManager-Bastion', {
+  vpc: network_stack.vpc
+})
 new AuroraDBStack(app, 'UsingSessionManager-AuroraDB', {})
