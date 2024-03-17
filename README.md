@@ -16,7 +16,7 @@ of several stacks to allow for modular deployment.
 The stacks are:
 
  - Networking (required for all stories)
- - BasicCompute
+ - BastionHost
  - AuroraDB
 
 Each story will explain specifically which stacks are necessary
@@ -32,5 +32,5 @@ Each story will explain specifically which stacks are necessary
 
 Please see the following Medium stories as guides for using this repository:
 
- - (Coming soon)
+ - [Using AWS SSM Session Manager to Connect to Private Resources: Leveraging the `start-session` command](https://medium.com/@mylesloffler/using-aws-ssm-session-manager-to-connect-to-private-resources-a0933b4dc6e3)
  - (Coming soon)
