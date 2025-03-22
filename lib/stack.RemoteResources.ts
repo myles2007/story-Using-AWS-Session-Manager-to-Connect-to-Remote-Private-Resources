@@ -13,9 +13,6 @@ import { SimpleAuroraDB } from "./construct.SimpleAuroraDB";
 interface RemoteResourcesStackProps extends cdk.StackProps {
   vpc: ec2.Vpc;
   bastionSg: ec2.SecurityGroup;
-  resources: {
-    db: boolean;
-  };
 }
 
 export class RemoteResourcesStack extends cdk.Stack {
@@ -24,11 +21,9 @@ export class RemoteResourcesStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: RemoteResourcesStackProps) {
     super(scope, id, props);
 
-    if (props.resources.db) {
-      const db = new SimpleAuroraDB(this, "UsingSessionManager-AuroraDB", {
-        vpc: props.vpc,
-      });
-      db.allowIngress(props.bastionSg, "Allow Bastion to connect to the DB");
-    }
+    const db = new SimpleAuroraDB(this, "UsingSessionManager-AuroraDB", {
+      vpc: props.vpc,
+    });
+    db.allowIngress(props.bastionSg, "Allow Bastion to connect to the DB");
   }
 }

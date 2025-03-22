@@ -4,7 +4,6 @@ import * as cdk from "aws-cdk-lib";
 import { NetworkStack } from "../lib/stack.Networking";
 import { BastionStack } from "../lib/stack.BastionHost";
 import { RemoteResourcesStack } from "../lib/stack.RemoteResources";
-import { getEnvVarOrDefault, tryGetEnvVar } from "../lib/utils/environment";
 
 const app = new cdk.App();
 const network_stack = new NetworkStack(app, "UsingSessionManager-Network", {
@@ -31,9 +30,5 @@ const remoteResources = new RemoteResourcesStack(
   {
     vpc: network_stack.vpc,
     bastionSg: bastion.bastionSg,
-    resources: {
-      db:
-        getEnvVarOrDefault({ name: "INCLUDE_DB", default: "false" }) === "true",
-    },
   },
 );
