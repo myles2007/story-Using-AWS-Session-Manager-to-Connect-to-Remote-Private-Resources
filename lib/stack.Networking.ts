@@ -83,9 +83,9 @@ export class NetworkStack extends cdk.Stack {
     this.vpc.addInterfaceEndpoint("ssm", {
       service: ec2.InterfaceVpcEndpointAwsService.SSM,
     });
-    this.vpc.addInterfaceEndpoint("ec2messages", {
-      service: ec2.InterfaceVpcEndpointAwsService.EC2_MESSAGES,
-    });
+    // this.vpc.addInterfaceEndpoint("ec2messages", {
+    //   service: ec2.InterfaceVpcEndpointAwsService.EC2_MESSAGES,
+    // });
     this.vpc.addInterfaceEndpoint("ssmmessages", {
       service: ec2.InterfaceVpcEndpointAwsService.SSM_MESSAGES,
     });
