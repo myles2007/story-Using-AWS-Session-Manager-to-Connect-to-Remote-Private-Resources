@@ -105,12 +105,13 @@ export class SimpleAuroraDB extends Construct {
       value: `${this.cluster.clusterEndpoint.hostname}`,
       description: "The cluster endpoint",
     });
-    new cdk.CfnOutput(this, "LogicalDbName", {
+    new cdk.CfnOutput(this, "DatabaseName", {
       value: DB_NAME,
-      description: "The logical name of the database within the cluster",
+      description: "The name of the database within the cluster",
     });
   }
 
+  // Allow ingress from a peer (e.g. the bastion host) to the database cluster
   allowIngress(peer: ec2.IPeer, ruleDescription?: string) {
     const ports = new Set([this.cluster.clusterEndpoint.port]);
     for (const port of ports) {
