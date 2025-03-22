@@ -27,7 +27,6 @@ export class BastionStack extends cdk.Stack {
       // This EC2 instance will reside in a private subnet without
       // any access to the internet at all.
       subnetSelection: { subnetType: ec2.SubnetType.PRIVATE_ISOLATED },
-      requireImdsv2: true,
       // It's security group will allow all outbound traffic, so that it
       // can communicate with the Systems Manager service in the VPC.
       // It still cannot communicate with the internet, however.
