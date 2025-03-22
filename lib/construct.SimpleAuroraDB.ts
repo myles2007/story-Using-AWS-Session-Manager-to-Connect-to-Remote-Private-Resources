@@ -102,10 +102,12 @@ export class SimpleAuroraDB extends Construct {
     });
 
     new cdk.CfnOutput(this, "DbClusterEndpoint", {
+      key: "DbClusterEndpoint",
       value: `${this.cluster.clusterEndpoint.hostname}`,
       description: "The cluster endpoint",
     });
     new cdk.CfnOutput(this, "DatabaseName", {
+      key: "DatabaseName",
       value: DB_NAME,
       description: "The name of the database within the cluster",
     });
