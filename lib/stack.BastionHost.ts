@@ -1,20 +1,26 @@
-import * as cdk from 'aws-cdk-lib';
-import { Construct } from 'constructs';
-import * as ec2 from 'aws-cdk-lib/aws-ec2';
+import * as cdk from "aws-cdk-lib";
+import { Construct } from "constructs";
+import * as ec2 from "aws-cdk-lib/aws-ec2";
 
 interface BastionStackProps extends cdk.StackProps {
   vpc: ec2.IVpc;
 }
 
 export class BastionStack extends cdk.Stack {
+  public readonly bastionSg: ec2.SecurityGroup;
 
   constructor(scope: Construct, id: string, props: BastionStackProps) {
     super(scope, id, props);
 
-    const bastionSecurityGroup = new ec2.SecurityGroup(this, "bastionSecurityGroup", {
-      vpc: props.vpc,
-      allowAllOutbound: true,
-    });
+    const bastionSecurityGroup = new ec2.SecurityGroup(
+      this,
+      "bastionSecurityGroup",
+      {
+        vpc: props.vpc,
+        allowAllOutbound: true,
+      },
+    );
+    this.bastionSg = bastionSecurityGroup;
 
     const bastion = new ec2.BastionHostLinux(this, "bastion", {
       vpc: props.vpc,
@@ -32,7 +38,7 @@ export class BastionStack extends cdk.Stack {
       }),
       instanceType: ec2.InstanceType.of(
         ec2.InstanceClass.T4G,
-        ec2.InstanceSize.NANO
+        ec2.InstanceSize.NANO,
       ),
       blockDevices: [
         {
@@ -53,7 +59,7 @@ export class BastionStack extends cdk.Stack {
     const bastionLaunchTemplate = new ec2.LaunchTemplate(
       this,
       "UsingSessionManager-BastionLaunchTemplate",
-      {}
+      {},
     );
 
     const cfnInstance = bastion.instance.node.defaultChild as ec2.CfnInstance;
@@ -61,5 +67,10 @@ export class BastionStack extends cdk.Stack {
       launchTemplateId: bastionLaunchTemplate.launchTemplateId,
       version: bastionLaunchTemplate.latestVersionNumber,
     };
+
+    new cdk.CfnOutput(this, "BastionInstanceId", {
+      value: bastion.instance.instanceId,
+      description: "The ID of the bastion host instance",
+    });
   }
 }

@@ -1,13 +1,12 @@
-import * as cdk from 'aws-cdk-lib';
-import { Construct } from 'constructs';
-import * as ec2 from 'aws-cdk-lib/aws-ec2';
+import * as cdk from "aws-cdk-lib";
+import { Construct } from "constructs";
+import * as ec2 from "aws-cdk-lib/aws-ec2";
 
 const VPC_CIDR = "10.0.0.0/16"; // 65,536 IP addresses in total
-const SUBNET_CIDR_MASK = 20;    // 4096 IP addresses per subnet
-const MAX_AZ_COUNT = 1;         // Just one AZ... we don't need more for this example
+const SUBNET_CIDR_MASK = 20; // 4096 IP addresses per subnet
+const MAX_AZ_COUNT = 2; // Just one AZ... we don't need more for this example
 
 export class NetworkStack extends cdk.Stack {
-
   // We'll import this in our other stacks. Doing so will implicitly
   // create a CloudFormation export/import that allows us to reference
   // the VPC in other stacks.
