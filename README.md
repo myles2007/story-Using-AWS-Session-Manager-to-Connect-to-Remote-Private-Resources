@@ -1,36 +1,61 @@
 # Welcome
 
-This project is intended to be used alongside my series of Medium stories under
-umbrella title:
+This project is intended to be used alongside my Medium story titled:
 
-"Using AWS Session Manager to Connec to Remote, Private Resources"
+[Using AWS SSM Session Manager to Connect to Private Resources: Port Forwarding Edition](https://medium.com/@mylesloffler/using-aws-ssm-session-manager-to-connect-to-private-resources-3083f55e3f16)
 
-At this time, it covers:
+Please see this story as a guide for using this branch of this repository.
 
- - Connecting to a private EC2 instance using AWS Session Manager
- - (Coming Soon) Leveraging Session Manager Port Forwarding to connect to a private database
+# What We'll Be Doing
+We'll be using AWS SSM Session Manager to connect to a remote, private database through an EC2 instance with no connectivity to the public internet.
 
-The project structure is reflective of `cdk init app --languge=typescript` and is comprised
+All resources are defined using AWS CDK for easy deployment and teardown.
+
+# Project Structure
+The project structure is reflective of `cdk init app --languge=typescript` with additional files and directories to support the specific solution.
+
+For this specific variant:
+
+```
+.
+├── README.md
+├── bin
+│   └── using-session-manager.ts
+├── cdk.json
+├── jest.config.js
+├── lib
+│   ├── construct.SimpleAuroraDB.ts
+│   ├── stack.BastionHost.ts
+│   ├── stack.Networking.ts
+│   ├── stack.RemoteResources.ts
+├── package-lock.json
+├── package.json
+├── scratch.sh
+├── test
+│   └── using-session-manager.test.ts
+└── tsconfig.json
+
+5 directories, 15 files
+```
+
+# The Stacks
 of several stacks to allow for modular deployment.
 
 The stacks are:
 
  - Networking (required for all stories)
  - BastionHost
- - AuroraDB
+ - RemoteResources (e.g., Aurora RDS Cluster)
 
-Each story will explain specifically which stacks are necessary
+The exact stacks and resources will vary per story.
 
 >[!WARNING]
-> Several of the resources launched by this example (e.g., the EC2 instance and
-> Aurora RDS Cluster) are billed based on the time they are provisined.
+> Several of the resources launched by this example are billed based on the time they are provisined.
+>
 > Free Tier eligible resources are used wherever possible, but none of these
 > resources exist in the Always Free Tier and will eventually become paid.
 >
+> This solution will cost approximately $33/month to run if the database is mostly inactive.
+>
 > **You should delete your CloudFormation stacks associated with this repository
 > when you are done with them to avoid unexpected bills**
-
-Please see the following Medium stories as guides for using this repository:
-
- - [Using AWS SSM Session Manager to Connect to Private Resources: Leveraging the `start-session` command](https://medium.com/@mylesloffler/using-aws-ssm-session-manager-to-connect-to-private-resources-a0933b4dc6e3)
- - (Coming soon)
