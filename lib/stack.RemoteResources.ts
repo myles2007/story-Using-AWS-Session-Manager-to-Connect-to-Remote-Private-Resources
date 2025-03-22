@@ -16,8 +16,6 @@ interface RemoteResourcesStackProps extends cdk.StackProps {
 }
 
 export class RemoteResourcesStack extends cdk.Stack {
-  public db: SimpleAuroraDB | undefined;
-
   constructor(scope: Construct, id: string, props: RemoteResourcesStackProps) {
     super(scope, id, props);
 
