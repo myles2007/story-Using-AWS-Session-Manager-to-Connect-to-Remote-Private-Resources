@@ -68,7 +68,7 @@ export class SimpleAuroraDB extends Construct {
       defaultDatabaseName: DB_NAME,
       serverlessV2MinCapacity: 0, // Scale all the way down to zero when idle
       serverlessV2MaxCapacity: 1, // This is just a demo, so keep it small
-      deletionProtection: true,
+      deletionProtection: false, // This is just a demo, we want to destroy the cluster when the stack is deleted
       storageEncrypted: true,
       iamAuthentication: true,
       parameterGroup: clusterReaderParameterGroup,
