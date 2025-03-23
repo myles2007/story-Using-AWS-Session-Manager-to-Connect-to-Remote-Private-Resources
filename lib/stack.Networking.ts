@@ -4,7 +4,7 @@ import * as ec2 from "aws-cdk-lib/aws-ec2";
 
 const VPC_CIDR = "10.0.0.0/16"; // 65,536 IP addresses in total
 const SUBNET_CIDR_MASK = 20; // 4096 IP addresses per subnet
-const MAX_AZ_COUNT = 2; // Just one AZ... we don't need more for this example
+const MAX_AZ_COUNT = 2; // We need two AZs to support our Aurora DB
 
 export class NetworkStack extends cdk.Stack {
   // We'll import this in our other stacks. Doing so will implicitly
