@@ -6,6 +6,11 @@ This project is intended to be used alongside my Medium story titled:
 
 Please see this story as a guide for using this branch of this repository.
 
+To clone this branch of the repository, run the following command:
+```
+git clone -b port-forwarding-edition git@github.com:myles2007/story-Using-AWS-Session-Manager-to-Connect-to-Remote-Private-Resources.git using-session-manager.port-forwarding-edition
+```
+
 # What We'll Be Doing
 We'll be using AWS SSM Session Manager to connect to a remote, private database through an EC2 instance with no connectivity to the public internet.
 
